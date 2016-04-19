@@ -1,12 +1,12 @@
 (function () {
   'use strict';
   angular.module('BIUIApp')
-    .controller('DomainsCtrl', ['$scope', '$http', 'ApiService', 'Utils',
+    .controller('CarriersCtrl', ['$scope', '$http', 'ApiService', 'Utils',
       function ($scope, $http, ApiService, Utils) {
         $scope.displayed = [];
         $scope.startTime = Utils.getDateString(new Date().getTime() - 1000 * 3600 * 24);
         $scope.endTime = Utils.getDateString(new Date().getTime() - 1000 * 3600 * 24);
-        $scope.searchDomain = '';
+        $scope.searchValue = '';
 
         function getStartTime() {
           return new Date($scope.startTime).getTime();
@@ -32,11 +32,11 @@
           var data = {
             'startTime': getStartTime(),
             'endTime': getEndTime(),
-            'searchDomain': $scope.searchDomain,
+            'searchValue': $scope.searchValue,
             'pageSize': 20
           };
 
-          ApiService.getDomains(function (response) {
+          ApiService.getCarriers(function (response) {
             $scope.displayed = [];
             $scope.item = [];
             $scope.data = [];
@@ -46,7 +46,10 @@
                 'number': row[1]
               });
               $scope.item.push(row[0]);
-              $scope.data.push(Number(row[1]));
+              $scope.data.push({
+                'name': row[0],
+                'value': Number(row[1])
+              });
             });
             $scope.isLoading = false;
             if ($scope.item.length > 0) {
@@ -80,46 +83,51 @@
 
         function _chart() {
           var option = {
-            title: {
-              text: 'TOP20'
-            },
             tooltip: {
-              trigger: 'axis'
+              trigger: 'item',
+              formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
             legend: {
-              data: ['Domains']
+              orient: 'vertical',
+              x: 'left',
+              data: $scope.item
             },
             toolbox: {
               show: false
             },
             calculable: true,
-            xAxis: [
-              {
-                type: 'category',
-                data: $scope.item
-              }
-            ],
-            yAxis: [
-              {
-                type: 'value'
-              }
-            ],
             series: [
               {
-                name: '访问量',
-                type: 'bar',
-                data: $scope.data,
-                markLine: {
-                  data: [
-                    {type: 'average', name: '平均值'}
-                  ]
-                }
+                name: '访问来源',
+                type: 'pie',
+                radius: ['40%', '90%'],
+                itemStyle: {
+                  normal: {
+                    label: {
+                      show: false
+                    },
+                    labelLine: {
+                      show: false
+                    }
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      position: 'center',
+                      textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                      }
+                    }
+                  }
+                },
+                data: $scope.data
               }
             ]
           };
+
           var myChart = echarts.init(document.getElementById('domain-charts'), 'macarons');
           myChart.setOption(option);
         }
-
       }]);
 }());

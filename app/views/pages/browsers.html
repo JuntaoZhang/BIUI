@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">domain统计</h1>
+            <h1 class="page-header">浏览器排行</h1>
         </div>
     </div>
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="">domain排行</a></li>
+            <li><a href="">浏览器排行</a></li>
         </ol>
         <div class="row">
             <div class="col-lg-2">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for domain" ng-model="searchDomain">
+                        <input type="text" class="form-control" placeholder="Search for domain" ng-model="searchValue">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" ng-click="search()">Search</button>
                       </span>
@@ -69,21 +69,21 @@
                 <table class="table" st-pipe="callServer" st-table="displayed">
                     <thead>
                     <tr>
-                        <th>域名</th>
+                        <th>浏览器</th>
                         <th>访问量</th>
-                        <th>操作</th>
+                        <!--<th>操作</th>-->
                     </tr>
                     </thead>
                     <tbody ng-show="!isLoading">
                     <tr ng-repeat="row in displayed">
                         <td>{{row.domain}}</td>
                         <td>{{row.number}}</td>
-                        <td><a href="" ui-sref="dashboard.domain-detail({domain:row.domain,startTime:startTime,endTime:endTime})">详细</a></td>
+                        <!--<td><a href="" ui-sref="dashboard.domain-detail({domain:row.domain,startTime:startTime,endTime:endTime})">详细</a></td>-->
                     </tr>
                     </tbody>
                     <tbody ng-show="isLoading">
                     <tr>
-                        <td colspan="3" class="text-center">
+                        <td colspan="2" class="text-center">
                             <div class="loading-indicator"></div>
                         </td>
                     </tr>

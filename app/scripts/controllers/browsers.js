@@ -1,12 +1,12 @@
 (function () {
   'use strict';
   angular.module('BIUIApp')
-    .controller('DomainsCtrl', ['$scope', '$http', 'ApiService', 'Utils',
+    .controller('BrowsersCtrl', ['$scope', '$http', 'ApiService', 'Utils',
       function ($scope, $http, ApiService, Utils) {
         $scope.displayed = [];
         $scope.startTime = Utils.getDateString(new Date().getTime() - 1000 * 3600 * 24);
         $scope.endTime = Utils.getDateString(new Date().getTime() - 1000 * 3600 * 24);
-        $scope.searchDomain = '';
+        $scope.searchValue = '';
 
         function getStartTime() {
           return new Date($scope.startTime).getTime();
@@ -32,11 +32,11 @@
           var data = {
             'startTime': getStartTime(),
             'endTime': getEndTime(),
-            'searchDomain': $scope.searchDomain,
-            'pageSize': 20
+            'searchValue': $scope.searchValue,
+            'pageSize': 10
           };
 
-          ApiService.getDomains(function (response) {
+          ApiService.getBrowsers(function (response) {
             $scope.displayed = [];
             $scope.item = [];
             $scope.data = [];
@@ -46,7 +46,10 @@
                 'number': row[1]
               });
               $scope.item.push(row[0]);
-              $scope.data.push(Number(row[1]));
+              $scope.data.push({
+                'name': row[0],
+                'value': Number(row[1])
+              });
             });
             $scope.isLoading = false;
             if ($scope.item.length > 0) {
@@ -80,46 +83,35 @@
 
         function _chart() {
           var option = {
-            title: {
-              text: 'TOP20'
+            title : {
+              text: '浏览器TOP10',
+              x:'center'
             },
-            tooltip: {
-              trigger: 'axis'
+            tooltip : {
+              trigger: 'item',
+              formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
             legend: {
-              data: ['Domains']
+              orient : 'vertical',
+              x : 'left',
+              data:$scope.item
             },
             toolbox: {
-              show: false
+              show : false
             },
-            calculable: true,
-            xAxis: [
+            calculable : true,
+            series : [
               {
-                type: 'category',
-                data: $scope.item
-              }
-            ],
-            yAxis: [
-              {
-                type: 'value'
-              }
-            ],
-            series: [
-              {
-                name: '访问量',
-                type: 'bar',
-                data: $scope.data,
-                markLine: {
-                  data: [
-                    {type: 'average', name: '平均值'}
-                  ]
-                }
+                name:'',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:$scope.data
               }
             ]
           };
           var myChart = echarts.init(document.getElementById('domain-charts'), 'macarons');
           myChart.setOption(option);
         }
-
       }]);
 }());

@@ -63,13 +63,13 @@
               $scope.isLoading = false;
               $scope.tableParams.reload();
 
-              chart();
+              _chart();
             }, data);
           }
 
           _search();
 
-          function chart() {
+          function _chart() {
             var option = {
               // 提示框，鼠标悬浮交互时的信息提示
               tooltip: {

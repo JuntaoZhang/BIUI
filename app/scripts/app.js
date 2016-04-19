@@ -92,6 +92,91 @@
             templateUrl: 'views/pages/blank.html',
             url: '/blank'
           })
+          .state('dashboard.regions', {
+            templateUrl: 'views/pages/regions.html',
+            url: '/regions',
+            controller: 'RegionsCtrl',
+            resolve: {
+              loadMyFile: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                  {
+                    files: [
+                      'bower_components/echarts/build/dist/echarts-all.js'
+                    ]
+                  },
+                  {
+                    name: 'ngTable',
+                    files: [
+                      'bower_components/ng-table/dist/ng-table.css',
+                      'bower_components/ng-table/dist/ng-table.js'
+                    ]
+                  },
+                  {
+                    name: 'BIUIApp',
+                    files: [
+                      'scripts/services/api.js',
+                      'scripts/services/utils.js',
+                      'scripts/controllers/regions.js'
+                    ]
+                  }
+                ]);
+              }
+            }
+          })
+          .state('dashboard.browsers', {
+            templateUrl: 'views/pages/browsers.html',
+            url: '/browsers',
+            controller: 'BrowsersCtrl',
+            resolve: {
+              loadMyFile: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                  {
+                    files: [
+                      'bower_components/echarts/build/dist/echarts-all.js'
+                    ]
+                  },
+                  {
+                    name: 'BIUIApp',
+                    files: [
+                      'scripts/services/api.js',
+                      'scripts/services/utils.js',
+                      'scripts/controllers/browsers.js'
+                    ]
+                  }
+                ]);
+              }
+            }
+          })
+          .state('dashboard.carriers', {
+            templateUrl: 'views/pages/carriers.html',
+            url: '/carriers',
+            controller: 'CarriersCtrl',
+            resolve: {
+              loadMyFile: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                  {
+                    files: [
+                      'bower_components/echarts/build/dist/echarts-all.js'
+                    ]
+                  },
+                  {
+                    name: 'BIUIApp',
+                    files: [
+                      'scripts/services/api.js',
+                      'scripts/services/utils.js',
+                      'scripts/controllers/carriers.js'
+                    ]
+                  },
+                  {
+                    name: 'smart-table',
+                    files: [
+                      'bower_components/angular-smart-table/dist/smart-table.js'
+                    ]
+                  }
+                ]);
+              }
+            }
+          })
           .state('dashboard.domains', {
             templateUrl: 'views/pages/domains.html',
             url: '/domains',
@@ -153,24 +238,6 @@
               }
             }
           })
-          /*.state('dashboard.echarts', {
-           templateUrl: 'views/pages/echarts.html',
-           url: '/echarts',
-           controller:'LineCtrl',
-           resolve: {
-           loadMyFile: function ($ocLazyLoad) {
-           return $ocLazyLoad.load([
-           {
-           files: [
-           'bower_components/echarts/build/dist/echarts-all.js',
-           'scripts/directives/echats/echats.js',
-           'scripts/services/Services.js'
-           ]
-           }
-           ]);
-           }
-           }
-           })*/
           .state('login', {
             templateUrl: 'views/pages/login.html',
             url: '/login'
