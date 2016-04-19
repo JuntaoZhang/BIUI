@@ -1,12 +1,7 @@
-'use strict';
-/**
- * @ngdoc function
- * @name sbAdminApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the sbAdminApp
- */
-angular.module('sbAdminApp')
-  .controller('MainCtrl', function ($scope, $position) {
-    console.log("MainCtrl");
-  });
+(function () {
+  'use strict';
+  angular.module('BIUIApp')
+    .controller('MainCtrl', function () {
+      console.log('MainCtrl');
+    });
+}());

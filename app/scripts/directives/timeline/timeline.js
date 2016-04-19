@@ -6,11 +6,11 @@
  * @description
  * # adminPosHeader
  */
-angular.module('sbAdminApp')
+angular.module('BIUIApp')
 	.directive('timeline',function() {
     return {
         templateUrl:'scripts/directives/timeline/timeline.html',
         restrict: 'E',
-        replace: true,
+        replace: true
     }
   });

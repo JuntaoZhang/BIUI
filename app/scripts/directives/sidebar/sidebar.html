@@ -3,6 +3,9 @@
         <ul class="nav in" id="side-menu">
             <sidebar-search></sidebar-search>
             <li ui-sref-active="active">
+                <a ui-sref="dashboard.domains"><i class="fa fa-dashboard fa-fw"></i>Domain统计</a>
+            </li>
+            <li ui-sref-active="active">
                 <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li ui-sref-active="active">
@@ -42,7 +45,7 @@
             </li>
             <li ng-class="{active: collapseVar==2}">
                 <a href="" ng-click="check(2)">
-                    <i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <i class="fa fa-sitemap fa-fw"></i>Multi-Level Dropdown<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
                     <li>
                         <a href="">Second Level Item</a>
@@ -76,6 +79,9 @@
                     <i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=4">
+                    <li ng-class="{active: selectedMenu=='echarts'}">
+                        <a ui-sref="dashboard.echarts" ng-click="selectedMenu='echarts'">百度Echarts</a>
+                    </li>
                     <li ng-class="{active: selectedMenu=='blank'}">
                         <a ui-sref="dashboard.blank" ng-click="selectedMenu='blank'">Blank Page</a>
                     </li>
@@ -83,10 +89,8 @@
                         <a ui-sref="login">Login Page</a>
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
             </li>
             <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>
     </div>
-    <!-- /.sidebar-collapse -->
 </div>

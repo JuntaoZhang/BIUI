@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">domain统计</h1>
+        </div>
+    </div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="" ui-sref="dashboard.domains">domain</a></li>
+            <li class="active">{{domain}}</li>
+        </ol>
+        <div class="row">
+            <div class="row col-lg-8">
+                <div class="col-lg-3">
+                    <button class="btn btn-default" type="button" ng-click="search(-1)">昨天</button>
+                    <button class="btn btn-default" type="button" ng-click="search(-7)">7天</button>
+                    <button class="btn btn-default" type="button" ng-click="search(-30)">30天</button>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">from</span>
+                        <input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="startTime" is-open="isBeforeOpen" close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default"ng-click="openBefore($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="form-control" datepicker-popup="yyyy/MM/dd"
+                               ng-model="endTime" is-open="isAfterOpen" close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openAfter($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="search()">Search</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                图标统计
+            </div>
+            <div class="panel-body">
+                <div id="domain-charts" style="height:400px;"></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                详细数据
+            </div>
+            <div class="table-container">
+                <table class="table" ng-table="tableParams">
+                    <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>访问量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in $data">
+                        <td>{{row.date}}</td>
+                        <td>{{row.number}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

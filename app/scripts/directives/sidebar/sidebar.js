@@ -6,7 +6,7 @@
  * @description
  * # adminPosHeader
  */
-angular.module('sbAdminApp')
+angular.module('BIUIApp')
   .directive('sidebar',['$location',function() {
     return {
       templateUrl:'scripts/directives/sidebar/sidebar.html',
@@ -16,19 +16,14 @@ angular.module('sbAdminApp')
       },
       controller:function($scope){
         $scope.selectedMenu = 'dashboard';
-        $scope.collapseVar = 2;
-        $scope.multiCollapseVar = 3;
+        $scope.collapseVar = 0;
+        $scope.multiCollapseVar = 0;
 
         $scope.check = function(x){
-          alert(x);
           if(x==$scope.collapseVar)
             $scope.collapseVar = 0;
           else
             $scope.collapseVar = x;
-        };
-
-        $scope.test=function () {
-          console.log("hello")
         };
 
         $scope.multiCheck = function(y){
